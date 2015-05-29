@@ -71,7 +71,7 @@
                             <td>Type</td>
                             <td>
                                 <select id="type">
-                                    <option selected value="us_eagle">US Eagle</option>
+                                    <option selected value="US Eagle">US Eagle</option>
                                 </select>
                             </td>
                         </tr>
@@ -143,6 +143,7 @@
         var quantity = $("#quantity").val();
         var premium = $("#premium").val();
         var price = $("#price").val();
+        var totalPrice = Math.round(quantity * price * 100)/100;
 
         if (metal == "gold"){
             var metalRef = myDataRef.child("gold")
@@ -153,12 +154,14 @@
         else{
             var metalRef = myDataRef.child("platinum")
         }
+
         metalRef.push({metal: metal,
                         type: type,
                         purchase_date: purchase_date,
                         quantity: quantity,
                         premium: premium,
-                        price: price})
+                        price: price,
+                        totalPrice: totalPrice})
 
     });
     </script>

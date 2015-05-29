@@ -12,6 +12,7 @@
     <script src="./js/jquery-1.11.2.min.js"></script>
     <script src="./js/Chart.js"></script>
     <script src="./js/main.js"></script>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <title>My Gold - CoinFlip</title>
 </head>
 
@@ -148,31 +149,8 @@
                             <th>Value</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="stack_img_col"><div class="coin_mini"></div></td>
-                            <td><a href="wire4.html"></a>US Eagle</td>
-                            <td>1</td>
-                            <td>1.244</td>
-                            <td>.917</td>
-                            <td>1199.10</td>
-                        </tr>
-                        <tr>
-                            <td class="stack_img_col"><div class="coin_mini"></div></td>
-                            <td><a href="wire4.html"></a>US Eagle</td>
-                            <td>5</td>
-                            <td>1.244</td>
-                            <td>.917</td>
-                            <td>5995.50</td>
-                        </tr>
-                        <tr>
-                            <td class="stack_img_col"><div class="coin_mini"></div></td>
-                            <td><a href="wire4.html"></a>US Eagle</td>
-                            <td>5</td>
-                            <td>1.244</td>
-                            <td>.917</td>
-                            <td>5995.50</td>
-                        </tr>
+                    <tbody id="goldTable">
+                        <!-- javascript will add the table in here -->
                     </tbody>
                 </table>
             </section>
@@ -180,6 +158,15 @@
     </section>
     <script type="text/javascript">
     loadFooter();
+
+    var ref= new Firebase("https://blazing-inferno-6462.firebaseio.com/gold");
+
+    ref.on("child_added", function(snap){
+        var bullion = snap.val();
+
+        $('#goldTable').append('<tr><td class="stack_img_col"><div class="coin_mini"></div></td><td><a href="wire4.html"></a>'+bullion.type+'</td><td>'+bullion.quantity+'</td><td>1.244</td><td>.917</td><td>'+bullion.totalPrice+'</td></tr>');
+    });
+    
     </script>
 </body>
 
