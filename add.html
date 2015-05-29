@@ -21,12 +21,12 @@
     loadTopNav();
     </script>
     <script type="text/javascript">
-    loadSideNav(1);
+    loadSideNav(4);
     </script>
     <section class="main-section">
         <section class="coin_wrapper">
             <div class="mobile-nav">
-                <a href="wire3.html">
+                <a href="gold.html">
                     <svg class="icon icon-keyboard-arrow-left">
                         <symbol id="icon-keyboard-arrow-left" viewBox="0 0 1024 1024">
                             <title>keyboard-arrow-left</title>
@@ -38,7 +38,7 @@
                 ADD ITEM
             </div>
             <div class="coin_main">
-                <a href="wire3.html">
+                <a href="gold.html">
                     <div class="breadcrumb">
                         <svg class="icon icon-play-arrow-rev">
                             <symbol id="icon-play-arrow" viewBox="0 0 1024 1024">
@@ -125,8 +125,8 @@
                         </tr>
                     </table>
                     <!-- <button onclick="myFunction()"><span id="save">Save to My Stack</span></button> -->
-                    <a id="submit" href="wire3.html"><span id="save">Save to My Stack</span></a>
-                    <a href="wire3.html"><span id="cancel">Cancel</span></a>
+                    <a id="submit" href="#"><span id="save">Save to My Stack</span></a>
+                    <a href="home.html"><span id="cancel">Cancel</span></a>
                 </section>
             </div>
         </section>
@@ -136,7 +136,8 @@
 
     var myDataRef = new Firebase('https://blazing-inferno-6462.firebaseio.com');
 
-    $("#submit").click(function(){
+    $("#submit").click(function(e){
+        e.preventDefault();
         var metal = $("#metal").val();
         var type = $("#type").val();
         var purchase_date = $("#purchase_date").val();
@@ -145,14 +146,18 @@
         var price = $("#price").val();
         var totalPrice = Math.round(quantity * price * 100)/100;
 
+
         if (metal == "gold"){
             var metalRef = myDataRef.child("gold")
+            var backPage = 'gold.html'
         }
         else if(metal == "silver"){
             var metalRef = myDataRef.child("silver")
+            var backPage = 'silver.html'
         }
         else{
             var metalRef = myDataRef.child("platinum")
+            var backPage = 'platinum.html'
         }
 
         metalRef.push({metal: metal,
@@ -162,6 +167,8 @@
                         premium: premium,
                         price: price,
                         totalPrice: totalPrice})
+
+        window.location.href=backPage;
 
     });
     </script>
