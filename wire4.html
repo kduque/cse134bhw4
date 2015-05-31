@@ -12,6 +12,7 @@
     <script src="./js/jquery-1.11.2.min.js"></script>
     <script src="./js/velocity.min.js"></script>
     <script src="./js/main.js"></script>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <title>Gold Item - CoinFlip</title>
 </head>
 
@@ -107,7 +108,7 @@
                     </table>
 
                     <a id="submit" href="#"><span id="save">Edit</span></a>
-                    <a href="home.html"><span id="cancel">Delete from My Stack</span></a>
+                    <a href="#" id="delete"><span id="cancel">Delete from My Stack</span></a>
 
                 </section>
             </div>
@@ -115,6 +116,19 @@
     </section>
     <script type="text/javascript">
     loadFooter();
+
+    var myDataRef = new Firebase('https://blazing-inferno-6462.firebaseio.com');
+
+    $("#delete").click(function(e){
+        e.preventDefault();
+
+            var metalRef = myDataRef.child("gold")
+            var backPage = 'gold.html'
+ 
+        metalRef.remove();
+        window.location.href=backPage;
+
+    });    
     </script>
 </body>
 
