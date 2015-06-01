@@ -9,9 +9,8 @@
                 }
             })
                 .done(function( csvdata ) {
-                    alert("\nData from "+json_url+":\n"+csvdata);
-                    //console.log("\nData from "+json_url+":\n");
-                    //console.log(csvdata);
+                    return csvdata;
+                    //alert("\nData from "+json_url+":\n"+csvdata);
                 })
                 .fail( function(xhr, textStatus, errorThrown) {
                     alert(xhr.responseText);
@@ -148,9 +147,11 @@
                     json_url+="PL_MKT";
                     break;
             }
-            json_url+=".csv?auth_token=933vrq6wUfABXEf_sgH7&trim_start="+start;
+            //933vrq6wUfABXEf_sgH7
+            //d2kf65LVqGT78v81exkf mine
+            json_url+=".csv?auth_token=d2kf65LVqGT78v81exkf&trim_start="+start;
             if(end){
                 json_url+="&trim_end="+end;
             }
-            getJSON(json_url);
-        }
+            return getJSON(json_url);
+        }   

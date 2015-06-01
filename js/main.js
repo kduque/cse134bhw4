@@ -94,8 +94,37 @@ function loadFooter(){
 
 }
 
+function getLastSixMonths(){
+	return [moment().subtract(6, 'month').format("MMMM"),
+			moment().subtract(5, 'month').format("MMMM"),
+			moment().subtract(4, 'month').format("MMMM"),
+			moment().subtract(3, 'month').format("MMMM"),
+			moment().subtract(2, 'month').format("MMMM"), 
+			moment().subtract(1, 'month').format("MMMM"),
+			moment().format("MMMM")];
+}
 
+function getLastThirtyDays(){
+	var dates = [];
+	var j = 0;
+	for(var i = 30; i > 0; i--){
+		dates[j] = moment().subtract(i, 'day').format("MM/DD");
+		j++;
+	}
+	return dates;
+}
 
+function getdummydata(){
+	var data = [];
+	for(var j = 0; j < 30; j++){
+		data[j] = j;
+	}
+	return data;
+}
+
+function getLastThirtyDaysValue(metal){
+	if(metal == )
+}
 $(window).load(function() {
 
 	var path = window.location.pathname;
@@ -130,7 +159,8 @@ $(window).load(function() {
 
  		if(page == "home.html") {
  			var data = {
- 				labels: ["January", "February", "March", "April", "May", "June", "July"],
+ 				labels: getLastThirtyDays(),
+ 				//labels: ["January", "February", "March", "April", "May", "June"],
  				datasets: [
  				{
  					label: "Gold Total",
@@ -140,7 +170,8 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					data: [700,820,700,800,730,950,900]
+ 					//data: [700,820,700,800,730,950,900]
+ 					data: getdummydata()
  				},
  				{
  					label: "Platinum Total",
@@ -150,7 +181,8 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					data: [467, 555, 490, 550, 555, 560, 660]
+ 					//data: [467, 555, 490, 550, 555, 560, 660]
+ 					data: getdummydata()
  				},
  				{
  					label: "Silver Total",
@@ -160,7 +192,8 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					data: [200, 350, 300, 389, 330, 400, 488]
+ 					//data: [200, 350, 300, 389, 330, 400, 488]
+ 					data: getdummydata()
  				},
  				{
  					label: "1oz Gold",
@@ -170,7 +203,8 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					data: [100, 110, 120, 90, 102, 135, 115]
+ 					//data: [100, 110, 120, 90, 102, 135, 115]
+ 					data: getdummydata()
  				},
  				{
  					label: "1oz Platinum",
@@ -180,7 +214,8 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					data: [56, 78, 67, 68, 73, 80, 76]
+ 					//data: [56, 78, 67, 68, 73, 80, 76]
+ 					data: getdummydata()
  				},
  				{
  					label: "1oz Silver",
@@ -190,7 +225,8 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					data: [20, 22, 20, 32, 35, 50, 40]
+ 					//data: [20, 22, 20, 32, 35, 50, 40]
+ 					data: getdummydata()
  				},
  				]
  			};
