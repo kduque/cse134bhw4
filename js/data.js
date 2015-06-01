@@ -1,4 +1,4 @@
-        function getJSON(json_url){
+        function getJSON(json_url, metal){
             $.ajax({
                 type: "GET",
                 dataType: 'text',
@@ -9,8 +9,7 @@
                 }
             })
                 .done(function( csvdata ) {
-                    return csvdata;
-                    //alert("\nData from "+json_url+":\n"+csvdata);
+                    updateChart(metal, csvdata);
                 })
                 .fail( function(xhr, textStatus, errorThrown) {
                     alert(xhr.responseText);
@@ -153,5 +152,5 @@
             if(end){
                 json_url+="&trim_end="+end;
             }
-            return getJSON(json_url);
+            getJSON(json_url, metal);
         }   

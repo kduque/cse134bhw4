@@ -123,8 +123,28 @@ function getdummydata(){
 }
 
 function getLastThirtyDaysValue(metal){
-	if(metal == )
+	getMetalPrice(metal, moment().subtract(30, 'day').format("YYYY-MM-DD"));
 }
+
+function updateChart(metal, csvdata){
+	var dates = [];
+	var values = [];
+	var splitData = [];
+	var moreSplit = [];
+
+	console.log(metal);
+    splitData = csvdata.split("\n");
+
+	for(var i = 1; i < splitData.length; i++){
+		moreSplit = splitData[i].split(",");
+		dates.push(moreSplit[0]);
+		values.push(moreSplit[1]);
+	} 
+	console.log("DATES:\n"+ dates.length + "\n\nVALUES:\n"+values.length+"\n\n");
+
+	
+}
+
 $(window).load(function() {
 
 	var path = window.location.pathname;
@@ -160,7 +180,6 @@ $(window).load(function() {
  		if(page == "home.html") {
  			var data = {
  				labels: getLastThirtyDays(),
- 				//labels: ["January", "February", "March", "April", "May", "June"],
  				datasets: [
  				{
  					label: "Gold Total",
@@ -170,7 +189,6 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					//data: [700,820,700,800,730,950,900]
  					data: getdummydata()
  				},
  				{
@@ -181,7 +199,6 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					//data: [467, 555, 490, 550, 555, 560, 660]
  					data: getdummydata()
  				},
  				{
@@ -192,7 +209,6 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					//data: [200, 350, 300, 389, 330, 400, 488]
  					data: getdummydata()
  				},
  				{
@@ -203,7 +219,6 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					//data: [100, 110, 120, 90, 102, 135, 115]
  					data: getdummydata()
  				},
  				{
@@ -214,7 +229,6 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					//data: [56, 78, 67, 68, 73, 80, 76]
  					data: getdummydata()
  				},
  				{
@@ -225,7 +239,6 @@ $(window).load(function() {
  					pointStrokeColor: pointStroke,
  					pointHighlightFill: pointHighlightFill,
  					pointHighlightStroke: pointHighlightStroke,
- 					//data: [20, 22, 20, 32, 35, 50, 40]
  					data: getdummydata()
  				},
  				]
