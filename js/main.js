@@ -141,8 +141,14 @@ function updateChart(metal, csvdata){
 		values.push(moreSplit[1]);
 	} 
 	console.log("DATES:\n"+ dates.length + "\n\nVALUES:\n"+values.length+"\n\n");
+	var path = window.location.pathname;
+	var page = path.split("/").pop();
+	// Access the chart
+	// Change the label for the chart to the dates we extracted
+	// Remove all the data points for the metal being updated
+	// Add in new data
+	// Update the chart
 
-	
 }
 
 $(window).load(function() {
