@@ -58,8 +58,8 @@
                     </div>
                 </section>
                 <section class="market-status">
-                    <div class="market-open">Market is open</div>
-                    <div class="market-time">closes in 3h 36min</div>
+                    <div class="market-open" id="market"></div>
+                    <div class="market-time" id="clock"></div>
                 </section>
                 <section class="market-list">
 
@@ -189,7 +189,29 @@
 
     </section>
 
-    <script type="text/javascript">loadFooter();</script>
+    <script type="text/javascript">
+    loadFooter();
+
+    tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+
+    function GetClock(){
+        var d=new Date();
+        var hour=d.getHours(),min=d.getMinutes();
+            if(hour < 16){
+                document.getElementById('clock').innerHTML="closes in "+(16-hour)+" h "+(60-min)+" min ";
+                document.getElementById('market').innerHTML="Market is open";
+            }
+            else{
+                document.getElementById('market').innerHTML="Market is closed";
+            }
+        }
+
+        window.onload=function(){
+        GetClock();
+        setInterval(GetClock,1000);
+        }
+
+    </script>
 </body>
 
 </html>

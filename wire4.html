@@ -122,13 +122,14 @@
     $("#delete").click(function(e){
         e.preventDefault();
 
-            var metalRef = myDataRef.child("gold")
-            var backPage = 'gold.html'
+        var metalRef = myDataRef.child("gold")
+        var backPage = 'gold.html'
  
         metalRef.remove();
         window.location.href=backPage;
 
-    });    
+    });
+        
     </script>
 </body>
 
