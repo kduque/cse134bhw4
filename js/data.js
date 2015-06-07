@@ -17,6 +17,63 @@
                 });
         }
 
+        function getJSONGold(json_url){
+            $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: json_url,
+                crossDomain : true,
+                xhrFields: {
+                    withCredentials: false
+                }
+            })
+                .done(function( csvdata ) {
+                    parseDataGold(csvdata);
+                })
+                .fail( function(xhr, textStatus, errorThrown) {
+                    alert(xhr.responseText);
+                    alert(textStatus);
+                });
+        }
+
+        function getJSONSilver(json_url, goldValues){
+            $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: json_url,
+                crossDomain : true,
+                xhrFields: {
+                    withCredentials: false
+                }
+            })
+                .done(function( csvdata ) {
+                    parseDataSilver(goldValues, csvdata);
+                })
+                .fail( function(xhr, textStatus, errorThrown) {
+                    alert(xhr.responseText);
+                    alert(textStatus);
+                });
+        }
+
+        function getJSONPlatinum(json_url, goldValues, silverValues){
+            $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: json_url,
+                crossDomain : true,
+                xhrFields: {
+                    withCredentials: false
+                }
+            })
+                .done(function( csvdata ) {
+                    parseDataPlatinum(goldValues, silverValues, csvdata);
+                })
+                .fail( function(xhr, textStatus, errorThrown) {
+                    alert(xhr.responseText);
+                    alert(textStatus);
+                });
+        }
+
         function getAskBids(){
             $.ajax({
                 type: "GET",
@@ -146,11 +203,35 @@
                     json_url+="PL_MKT";
                     break;
             }
-            //933vrq6wUfABXEf_sgH7
-            //d2kf65LVqGT78v81exkf mine
             json_url+=".csv?auth_token=d2kf65LVqGT78v81exkf&trim_start="+start;
             if(end){
                 json_url+="&trim_end="+end;
             }
             getJSON(json_url, metal);
-        }   
+        }
+
+        function getGoldPriceHist(start)
+        {
+            var json_url = "https://www.quandl.com/api/v1/datasets/WSJ/"; // there is a daily limit of 50 connections for unregistered users. You can create an account and add your security token like: https://www.quandl.com/api/v1/datasets/WSJ/PL_MKT.csv?auth_token=933vrq6wUfABXEf_sgH7&trim_start=2015-05-01 However the security is updated daily. Also you can use your own, or third party proxy like http://websitescraper.herokuapp.com/?url=https://www.quandl.com/api/v1/datasets/WSJ/AU_EIB.csv for additional 50 connections. This proxy will accept any url and return you the data, also helping to deal with same origin policy
+            json_url+="AU_EIB";
+
+            json_url+=".csv?auth_token=d2kf65LVqGT78v81exkf&trim_start="+start;
+            getJSONGold(json_url);
+        }
+        function getSilverPriceHist(start, goldValues)
+        {
+            var json_url = "https://www.quandl.com/api/v1/datasets/WSJ/"; // there is a daily limit of 50 connections for unregistered users. You can create an account and add your security token like: https://www.quandl.com/api/v1/datasets/WSJ/PL_MKT.csv?auth_token=933vrq6wUfABXEf_sgH7&trim_start=2015-05-01 However the security is updated daily. Also you can use your own, or third party proxy like http://websitescraper.herokuapp.com/?url=https://www.quandl.com/api/v1/datasets/WSJ/AU_EIB.csv for additional 50 connections. This proxy will accept any url and return you the data, also helping to deal with same origin policy
+            json_url+="AG_EIB";
+
+            json_url+=".csv?auth_token=d2kf65LVqGT78v81exkf&trim_start="+start;
+            getJSONSilver(json_url, goldValues);
+        }
+
+        function getPlatinumPriceHist(start, goldValues, silverValues)
+        {
+            var json_url = "https://www.quandl.com/api/v1/datasets/WSJ/"; // there is a daily limit of 50 connections for unregistered users. You can create an account and add your security token like: https://www.quandl.com/api/v1/datasets/WSJ/PL_MKT.csv?auth_token=933vrq6wUfABXEf_sgH7&trim_start=2015-05-01 However the security is updated daily. Also you can use your own, or third party proxy like http://websitescraper.herokuapp.com/?url=https://www.quandl.com/api/v1/datasets/WSJ/AU_EIB.csv for additional 50 connections. This proxy will accept any url and return you the data, also helping to deal with same origin policy
+            json_url+="PL_MKT";
+
+            json_url+=".csv?auth_token=d2kf65LVqGT78v81exkf&trim_start="+start;
+            getJSONPlatinum(json_url, goldValues, silverValues);
+        }
