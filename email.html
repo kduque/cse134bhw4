@@ -40,15 +40,14 @@
             </div>
             <div class="coin_main">
                 <div class="breadcrumb">
-                    Settings
+                    Change Email
                 </div>
                 <section id="welcomeMsg">
                 </section>
 
                 <section id="settings">
-                    <a href="password.html"><span id="password-button" onclick="logOut()">Change Password <img src="assets/lock.png" width=30></span></a>
-                    <a href="email.html"><span id="email-button" onclick="logOut()">Change Email <img src="assets/envelope.png" width=20></span></a>
-                    <a href="#"><span id="log-out-button" onclick="logOut()">Log out</span></a>
+                    <input id="password-box" placeholder=" Input New Email Address Here" />
+                    <a href="#"><span id="log-out-button" onclick="logOut()">Submit</span></a>
                 </section>
             </div>
         </section>
@@ -56,17 +55,6 @@
     <script type="text/javascript">
     loadFooter();
 
-    var myDataRef = new Firebase('https://blazing-inferno-6462.firebaseio.com/users/'+localStorage['userId']);
-
-    window.onload = function(){
-        var currAuth = myDataRef.getAuth();
-        document.getElementById("welcomeMsg").innerHTML="Hello " + currAuth.password.email;
-    }
-
-    function logOut(){
-        myDataRef.unauth();
-        window.location.href='index.html';
-    }
     </script>
 </body>
 

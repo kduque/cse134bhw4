@@ -386,6 +386,10 @@ a:visited {
     margin-top: 20px;
 }
 
+#password-box{
+    width: 100%;
+}
+
 #w1-left input[type="text"] {
     display: block;
     width: 94%;
@@ -427,6 +431,11 @@ a:visited {
 }
 
 #log-out-button {
+    background: #397C86;
+    border: 1px solid #151515;
+}
+
+#password-button, #email-button {
     background: #397C86;
     border: 1px solid #151515;
 }
