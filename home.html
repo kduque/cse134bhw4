@@ -199,7 +199,7 @@
     function GetClock(){
         var d=new Date();
         var hour=d.getHours(),min=d.getMinutes();
-            if(hour < 16){
+            if(hour < 16 & hour > 6){
                 document.getElementById('clock').innerHTML="closes in "+(16-hour)+" h "+(60-min)+" min ";
                 document.getElementById('market').innerHTML="Market is open";
             }
