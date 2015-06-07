@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="description" content="bullion management site, rare coins, gold, silver, platinum">
+    <meta name="author" content="CSE134B Dream Team">
+    <link rel="stylesheet" type="text/css" href="./style/style.css">
+    <meta name=viewport content="width=device-width, initial-scale=.8, minimum-scale = .8, user-scalable=yes">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src="./js/jquery-1.11.2.min.js"></script>
+    <script src="./js/velocity.min.js"></script>
+    <script src="./js/main.js"></script>
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <nav>
+        COINFLIP
+    </nav>
+    <div class="mobile-nav">
+        COINFLIP
+    </div>
+    <div id="w1-wrapper">
+
+        <section id="w1-left">
+            <center><h1>Sign Up</h1><br>
+            <h3 id="errorMsg" style="color:red"></h3>
+            </center><br>
+            <form action="javascript:void(0);" onsubmit="checkFields()">
+                <input id="email" type="text" placeholder="email"><br>
+                <input id="thePass" type="password" placeholder="password"><br>
+                <input type="submit" value="Sign up">
+            </form>
+            <!-- <a href="#"><span id="sign-up-button" onclick="checkFields()">Sign up</span></a> -->
+        </section>
+
+
+    </div>
+
+    <script type="text/javascript">loadFooter();</script>
+
+    <script>
+        var ref = new Firebase("https://blazing-inferno-6462.firebaseio.com");
+
+        function checkFields(){
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("thePass").value;
+
+            if(checkEmail(email)){
+                if(checkPassword(password)){
+                    register(email, password);
+                }
+                else{
+                    document.getElementById("errorMsg").innerHTML = "Password must be greater than 6 characters"
+                }
+            }
+            else{
+                // alert('error');
+                document.getElementById("errorMsg").innerHTML = "Invalid email"
+            }
+        }
+
+        function checkEmail(email){
+            var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+            return re.test(email);
+        }
+
+        function checkPassword(pass){
+            if(pass.length < 6){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+
+        function register(uEmail, uPass){
+            ref.createUser({
+              email    : uEmail,
+              password : uPass
+            }, function(error, userData) {
+              if (error) {
+                document.getElementById("errorMsg").innerHTML = error.message
+              } else {
+                alert('Account created. Please log in')
+                window.location.href="login.html"
+              }
+            });
+        }
+    </script>
+</body>
+
+</html>
