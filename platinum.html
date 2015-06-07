@@ -166,8 +166,13 @@
     ref.on("child_added", function(snap){
         var bullion = snap.val();
 
-        $('#platinumTable').append('<tr onclick=\"document.location=\'wire4.html\';\"><td class="stack_img_col"><div class="coin_mini"></div></td><td><a href="wire4.html"></a>'+bullion.type+'</td><td>'+bullion.quantity+'</td><td>1.244</td><td>.917</td><td>'+bullion.totalPrice+'</td></tr>');
+        $('#platinumTable').append('<tr onclick=\"detail(\''+snap.key()+'\')\"><td class="stack_img_col"><div class="coin_mini"></div></td><td>'+bullion.type+'</td><td>'+bullion.quantity+'</td><td>1.244</td><td>.917</td><td>'+bullion.totalPrice+'</td></tr>');
     });
+
+
+    function detail(key){
+        window.location.href="details.html?metal=p&key="+key;
+    }
     
     </script>
 </body>
