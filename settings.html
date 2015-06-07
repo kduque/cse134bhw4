@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="description" content="bullion management site, rare coins, gold, silver, platinum">
+    <meta name="author" content="CSE134B Dream Team">
+    <link rel="stylesheet" type="text/css" href="./style/style.css">
+    <meta name=viewport content="width=device-width, initial-scale=.8, minimum-scale = .8, user-scalable=yes">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <script src="./js/jquery-1.11.2.min.js"></script>
+    <script src="./js/velocity.min.js"></script>
+    <script src="./js/main.js"></script>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <title>Settings - CoinFlip</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    loadTopNav();
+    </script>
+    <script type="text/javascript">
+    loadSideNav(4);
+    </script>
+    <section class="main-section">
+        <section class="coin_wrapper">
+            <div class="mobile-nav">
+                <a href="gold.html">
+                    <svg class="icon icon-keyboard-arrow-left">
+                        <symbol id="icon-keyboard-arrow-left" viewBox="0 0 1024 1024">
+                            <title>keyboard-arrow-left</title>
+                            <path class="path1" d="M657.707 696.96l-195.627-195.627 195.627-195.627-60.373-60.373-256 256 256 256z"></path>
+                        </symbol>
+                        <use xlink:href="#icon-keyboard-arrow-left"></use>
+                    </svg>
+                </a>
+                ADD ITEM
+            </div>
+            <div class="coin_main">
+                <div class="breadcrumb">
+                    Settings
+                </div>
+                <section id="welcomeMsg">
+                </section>
+
+                <section id="settings">
+                    <a href="#"><span id="log-out-button" onclick="logOut()">Log out</span></a>
+                </section>
+            </div>
+        </section>
+    </section>
+    <script type="text/javascript">
+    loadFooter();
+
+    var myDataRef = new Firebase('https://blazing-inferno-6462.firebaseio.com/users/'+localStorage['userId']);
+
+    window.onload = function(){
+        var currAuth = myDataRef.getAuth();
+        document.getElementById("welcomeMsg").innerHTML="Hello " + currAuth.password.email;
+    }
+
+    function logOut(){
+        myDataRef.unauth();
+        window.location.href='index.html';
+    }
+    </script>
+</body>
+
+</html>

@@ -27,7 +27,7 @@
 
         <section id="w1-left">
             <center><h1>Log In</h1></center> <br>
-            <form onsubmit="login()">
+            <form action="javascript:void(0);" onsubmit="login()">
                 <input id="email" type="text" placeholder="email"><br>
                 <input id="thePass" type="password" placeholder="password">
                 <br>
@@ -53,6 +53,7 @@
                 console.log("Login Failed!", error);
               } else {
                 console.log("Authenticated successfully with payload:", authData);
+                window.location.href="home.html";
               }
             });
         }

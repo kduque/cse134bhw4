@@ -161,7 +161,7 @@
     <script type="text/javascript">
     loadFooter();
 
-    var ref= new Firebase("https://blazing-inferno-6462.firebaseio.com/platinum");
+    var ref= new Firebase("https://blazing-inferno-6462.firebaseio.com/users/"+localStorage['userId'] +"/platinum");
 
     ref.on("child_added", function(snap){
         var bullion = snap.val();

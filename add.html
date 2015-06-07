@@ -134,7 +134,7 @@
     <script type="text/javascript">
     loadFooter();
 
-    var myDataRef = new Firebase('https://blazing-inferno-6462.firebaseio.com');
+    var myDataRef = new Firebase('https://blazing-inferno-6462.firebaseio.com/users/'+localStorage['userId']);
 
     $("#submit").click(function(e){
         e.preventDefault();
