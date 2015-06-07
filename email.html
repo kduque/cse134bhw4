@@ -46,14 +46,41 @@
                 </section>
 
                 <section id="settings">
-                    <input id="password-box" placeholder=" Input New Email Address Here" />
-                    <a href="#"><span id="log-out-button" onclick="logOut()">Submit</span></a>
+
+                    <form action="javascript:void(0);" onsubmit="changeEmail()">
+                        <center>
+                            <h3 id="notifMsg"></h3><br>
+                            <input id="oldEmail" type="text" placeholder="Old Email Address"><br>
+                            <input id="newEmail" type="text" placeholder="New Email Address"><br>
+                            <input id="thePass" type="password" placeholder="Current Password">
+                            <br>
+                            <input type="submit" value="Submit">
+                        </center>
+                    </form>
                 </section>
             </div>
         </section>
     </section>
     <script type="text/javascript">
     loadFooter();
+
+    var ref = new Firebase("https://blazing-inferno-6462.firebaseio.com");
+    
+    function changeEmail(){
+        ref.changeEmail({
+              oldEmail : $("#oldEmail").val(),
+              newEmail : $("#newEmail").val(),
+              password : $("#thePass").val()
+            }, function(error) {
+              if (error === null) {
+                $("#notifMsg").html("Email changed successfully");
+                $("#notifMsg").css('color','green');
+              } else {
+                $("#notifMsg").html(error.message);
+                $("#notifMsg").css('color','red');
+              }
+            });
+    }
 
     </script>
 </body>

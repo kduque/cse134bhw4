@@ -416,6 +416,32 @@ a:visited {
     border: 1px solid #151515;
 }
 
+#settings input[type="text"] {
+    display: block;
+    width: 50%;
+    height: 55px;
+    line-height: 55px;
+    font-size: 1.3em;
+}
+
+#settings input[type="password"] {
+    display: block;
+    width: 50%;
+    height: 55px;
+    line-height: 55px;
+    font-size: 1.3em;
+}
+
+#settings input[type="submit"] {
+    display: block;
+    width: 50%;
+    height: 55px;
+    line-height: 55px;
+    font-size: 1.3em;
+    background: #397C86;
+    border: 1px solid #151515;
+}
+
 #sign-up-button {
     background: #1C3A3F;
     border: 1px solid #151515;

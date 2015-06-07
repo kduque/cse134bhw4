@@ -26,7 +26,9 @@
     <div id="w1-wrapper">
 
         <section id="w1-left">
-            <center><h1>Log In</h1></center> <br>
+            <center><h1>Log In</h1><br>
+            <h3 id="errorMsg" style="color:red"></h3>
+            </center><br>
             <form action="javascript:void(0);" onsubmit="login()">
                 <input id="email" type="text" placeholder="email"><br>
                 <input id="thePass" type="password" placeholder="password">
@@ -50,7 +52,7 @@
               password : document.getElementById("thePass").value
             }, function(error, authData) {
               if (error) {
-                console.log("Login Failed!", error);
+                document.getElementById("errorMsg").innerHTML = error.message;
               } else {
                 console.log("Authenticated successfully with payload:", authData);
                 window.location.href="home.html";
