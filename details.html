@@ -21,13 +21,13 @@
     loadTopNav();
     </script>
     <script type="text/javascript">
-    loadSideNav(1);
+    loadSideNav(4);
     </script>
     <section class="main-section">
         <section class="coin_wrapper">
             <div class="mobile-nav">
-                <a href="wire3.html">
-                    <svg class="icon icon-keyboard-arrow-left">
+                <a href="javascript:history.back()">
+                    <svg class="icon icon-keyboard-arrow-left" onclick="window.history.back()">
                         <symbol id="icon-keyboard-arrow-left" viewBox="0 0 1024 1024">
                             <title>keyboard-arrow-left</title>
                             <path class="path1" d="M657.707 696.96l-195.627-195.627 195.627-195.627-60.373-60.373-256 256 256 256z"></path>
@@ -38,8 +38,8 @@
                 ITEM DETAIL
             </div>
             <div class="coin_main">
-                <a href="wire3.html">
-                    <div class="breadcrumb">
+                <a href="javascript:history.back()">
+                    <div class="breadcrumb" onclick="window.history.back()">
                         <svg class="icon icon-play-arrow-rev">
                             <symbol id="icon-play-arrow" viewBox="0 0 1024 1024">
                                 <title>play-arrow</title>
@@ -59,30 +59,30 @@
                     <table>
                         <tr>
                             <td>Metal</td>
-                            <td>Gold</td>
+                            <td id="metal"></td>
                         </tr>
                         <tr>
                             <td>Type</td>
-                            <td>US Eagle</td>
+                            <td id="type"></td>
                         </tr>
                         <tr>
                             <td>Purchase Date</td>
-                            <td>04 March 2015</td>
+                            <td id="purchaseDate"></td>
                         </tr>
                         <tr>
                             <td>Qty.</td>
-                            <td>1</td>
+                            <td id="quantity"></td>
                         </tr>
                         <tr>
                             <td>Premium</td>
-                            <td>47.00</td>
+                            <td id="premium"></td>
                         </tr>
                         <tr>
                             <td>Unit Price</td>
-                            <td>1250.60</td>
+                            <td id="price"></td>
                         </tr>
                         <tr>
-                            <td>Gold %</td>
+                            <td id="metalPer"></td>
                             <td>0.999</td>
                         </tr>
                         <tr>
@@ -90,11 +90,11 @@
                             <td>1.244</td>
                         </tr>
                         <tr>
-                            <td>Gold g/u</td>
+                            <td id="metalGu"></td>
                             <td>1.244</td>
                         </tr>
                         <tr>
-                            <td>Gold ozt/u</td>
+                            <td id="metalOzt"></td>
                             <td>0.0400</td>
                         </tr>
                         <tr>
@@ -103,11 +103,10 @@
                         </tr>
                         <tr>
                             <td><strong>TOTAL</strong></td>
-                            <td><strong>1199.10</strong></td>
+                            <td><strong id="totalPrice"></strong></td>
                         </tr>
                     </table>
 
-                    <a id="submit" href="#"><span id="save">Edit</span></a>
                     <a href="#" id="delete"><span id="cancel">Delete from My Stack</span></a>
 
                 </section>
@@ -117,18 +116,59 @@
     <script type="text/javascript">
     loadFooter();
 
-    var myDataRef = new Firebase('https://blazing-inferno-6462.firebaseio.com');
+    var metLoc = window.location.href.search("metal")+6;
+    var keyLoc = window.location.href.search("key")+4
+
+    var key = window.location.href.substr(keyLoc);
+    var metal = window.location.href.substr(metLoc,1);
+
+    var metUrl = "none";
+    var backPage = "home.html";
+    var metStat = "none";
+
+    if(metal=='g'){
+        metUrl = "gold";
+        backPage = 'gold.html'
+        metStat = "Gold";
+    }
+    else if(metal=='s'){
+        metUrl = "silver";
+        backPage = 'silver.html'
+        metStat = "Silver";
+
+    }
+    else{
+        metUrl = "platinum";
+        backPage = 'platinum.html'
+        metStat = "Platinum";
+    }
+
+    var myUrl = 'https://blazing-inferno-6462.firebaseio.com/users/' + localStorage['userId'] + '/' + metUrl + '/' + key;
+    var myDataRef = new Firebase(myUrl);
 
     $("#delete").click(function(e){
-        e.preventDefault();
-
-        var metalRef = myDataRef.child("gold")
-        var backPage = 'gold.html'
+        e.preventDefault();        
  
-        metalRef.remove();
+        myDataRef.remove();
         window.location.href=backPage;
 
     });
+
+    window.onload = function(){
+        myDataRef.once("value", function(data){
+            coinProp = data.val();
+            $("#metal").html(coinProp.metal)
+            $("#type").html(coinProp.type)
+            $("#purchaseDate").html(coinProp.purchase_date)
+            $("#quantity").html(coinProp.quantity)
+            $("#premium").html(coinProp.premium)
+            $("#price").html(coinProp.price)
+            $("#metalPer").html(metStat + " %");
+            $("#metalGu").html(metStat + " g/u");
+            $("#metalOzt").html(metStat + " ozt/u");
+            $("#totalPrice").html(coinProp.totalPrice)
+        });
+    }
         
     </script>
 </body>

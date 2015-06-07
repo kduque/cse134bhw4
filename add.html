@@ -61,9 +61,9 @@
                             <td>Metal</td>
                             <td>
                                 <select id="metal">
-                                    <option value="gold">Gold</option>
-                                    <option value="silver">Silver</option>
-                                    <option value="platinum">Platinum</option>
+                                    <option value="Gold">Gold</option>
+                                    <option value="Silver">Silver</option>
+                                    <option value="Platinum">Platinum</option>
                                 </select>
                             </td>
                         </tr>
@@ -100,7 +100,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Gold %</td>
+                            <td id="metalPer">Gold %</td>
                             <td>0.999</td>
                         </tr>
                         <tr>
@@ -108,11 +108,11 @@
                             <td>1.244</td>
                         </tr>
                         <tr>
-                            <td>Gold g/u</td>
+                            <td id="metalGu">Gold g/u</td>
                             <td>1.244</td>
                         </tr>
                         <tr>
-                            <td>Gold ozt/u</td>
+                            <td id="metalOzt">Gold ozt/u</td>
                             <td>0.0400</td>
                         </tr>
                         <tr>
@@ -134,7 +134,13 @@
     <script type="text/javascript">
     loadFooter();
 
-    var myDataRef = new Firebase('https://blazing-inferno-6462.firebaseio.com');
+    var myDataRef = new Firebase('https://blazing-inferno-6462.firebaseio.com/users/'+localStorage['userId']);
+
+    $("#metal").click(function(){
+        $("#metalPer").html($("#metal").val() + " %");
+        $("#metalGu").html($("#metal").val() + " g/u");
+        $("#metalOzt").html($("#metal").val() + " ozt/u");
+    });
 
     $("#submit").click(function(e){
         e.preventDefault();
@@ -147,11 +153,11 @@
         var totalPrice = Math.round(quantity * price * 100)/100;
 
 
-        if (metal == "gold"){
+        if (metal == "Gold"){
             var metalRef = myDataRef.child("gold")
             var backPage = 'gold.html'
         }
-        else if(metal == "silver"){
+        else if(metal == "Silver"){
             var metalRef = myDataRef.child("silver")
             var backPage = 'silver.html'
         }
