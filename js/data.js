@@ -1,22 +1,3 @@
-        function getJSON(json_url, metal){
-            $.ajax({
-                type: "GET",
-                dataType: 'text',
-                url: json_url,
-                crossDomain : true,
-                xhrFields: {
-                    withCredentials: false
-                }
-            })
-                .done(function( csvdata ) {
-                    updateChart(metal, csvdata);
-                })
-                .fail( function(xhr, textStatus, errorThrown) {
-                    alert(xhr.responseText);
-                    alert(textStatus);
-                });
-        }
-
         function getJSONGold(json_url){
             $.ajax({
                 type: "GET",
@@ -186,28 +167,6 @@
                     alert(xhr.responseText);
                     alert(textStatus);
                 });
-        }
-
-
-        function getMetalPrice(metal,start,end)
-        {
-            var json_url = "https://www.quandl.com/api/v1/datasets/WSJ/"; // there is a daily limit of 50 connections for unregistered users. You can create an account and add your security token like: https://www.quandl.com/api/v1/datasets/WSJ/PL_MKT.csv?auth_token=933vrq6wUfABXEf_sgH7&trim_start=2015-05-01 However the security is updated daily. Also you can use your own, or third party proxy like http://websitescraper.herokuapp.com/?url=https://www.quandl.com/api/v1/datasets/WSJ/AU_EIB.csv for additional 50 connections. This proxy will accept any url and return you the data, also helping to deal with same origin policy
-            switch (metal) {
-                case 'gold':
-                    json_url+="AU_EIB";
-                    break;
-                case 'silver':
-                    json_url+="AG_EIB";
-                    break;
-                case 'platinum':
-                    json_url+="PL_MKT";
-                    break;
-            }
-            json_url+=".csv?auth_token=d2kf65LVqGT78v81exkf&trim_start="+start;
-            if(end){
-                json_url+="&trim_end="+end;
-            }
-            getJSON(json_url, metal);
         }
 
         function getGoldPriceHist(start)
