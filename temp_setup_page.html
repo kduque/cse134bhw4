@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Init Data</title>
+ 	<script src="https://cdn.firebase.com/js/client/2.2.6/firebase.js"></script>
+ 	<script src="./js/moment.min.js"></script>
+</head>
+
+<body>
+	<script type="text/javascript">
+		var chartData = new Firebase('https://blazing-inferno-6462.firebaseio.com/chartData');
+		chartData.push({
+			days: {},
+			gold:{},
+			silver:{},
+			platinum:{}
+		});
+		alert('Done with setting up.')
+	</script>
+
+</body>
